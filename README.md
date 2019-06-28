@@ -25,6 +25,11 @@ db_config = {
 }
 
 pure_mysql = PureMysql(**db_config)
+
+# 或者
+# url = "mysql://root:123456@127.0.0.1:3306/mydata"
+# pure_mysql = PureMysql(db_url=url)
+
 student = pure_mysql.table("student")
 
 

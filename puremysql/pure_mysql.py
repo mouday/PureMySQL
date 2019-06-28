@@ -8,11 +8,18 @@ import mysql.connector
 
 from puremysql.logger import pure_mysql_logger
 from puremysql.pure_table import PureTable
+from puremysql.util import parse_db_url
 
 
 class PureMysql(object):
-    def __init__(self, **db_config):
+    def __init__(self, db_url=None, **db_config):
         # 返回字典对象
+        if db_url:
+            parse_config = parse_db_url(db_url)
+            if parse_config.pop("scheme") != "mysql":
+                raise Exception("scheme not mysql")
+            else:
+                db_config.update(parse_config)
         self.connect = mysql.connector.connect(**db_config)
         self.cursor = self.connect.cursor(dictionary=True)
 
@@ -37,3 +44,8 @@ class PureMysql(object):
 
     def table(self, table_name):
         return PureTable(self, table_name)
+
+
+if __name__ == '__main__':
+    url = "mysql://root:123456@127.0.0.1:3306/demo?charset=utf8"
+    PureMysql(db_url=url)

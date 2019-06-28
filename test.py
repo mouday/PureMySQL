@@ -23,7 +23,12 @@ class PureTest(unittest.TestCase):
             "port": 3306,
         }
 
-        cls.pure_mysql = PureMysql(**db_config)
+        # cls.pure_mysql = PureMysql(**db_config)
+
+        # 或者
+        url = "mysql://root:123456@127.0.0.1:3306/mydata"
+        cls.pure_mysql = PureMysql(db_url=url)
+
         cls.student = cls.pure_mysql.table("student")
 
         drop_table = "drop table if exists student"
