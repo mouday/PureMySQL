@@ -8,6 +8,8 @@ import os
 
 from setuptools import setup, find_packages
 
+import os
+
 """
 ## 本地测试
 安装测试
@@ -57,6 +59,9 @@ with io.open(os.path.join(base_dir, "puremysql/version.py"), 'r') as f:
 with io.open("README.md", 'r', encoding='utf-8') as f:
     long_description = f.read()
 
+with io.open("requirements.txt", 'r') as f:
+    install_requires = f.read().split(os.sep)
+
 setup(
     name='PureMySQL',
     version=version["VERSION"],
@@ -80,7 +85,5 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     zip_safe=True,
-    install_requires=[
-        "mysql-connector-python>=8.0.16"
-    ]
+    install_requires=install_requires
 )

@@ -2,7 +2,7 @@
 
 # @Date    : 2019-06-27
 # @Author  : Peng Shiyu
-
+from __future__ import unicode_literals, print_function
 from puremysql.sql_builder_util import SQLBuilderUtil
 
 
@@ -24,10 +24,12 @@ class PureTable(object):
         return cursor.fetchall()
 
     def select_one(self, fields, where):
-        where = "{} LIMIT 1".format(where)
-        sql = SQLBuilderUtil.get_select_sql(self.table_name, fields, where)
-        cursor = self.execute(sql)
-        return cursor.fetchone()
+        result = self.select(fields, where, 1)
+        if len(result) == 1:
+            row = result[0]
+        else:
+            row = {}
+        return row
 
     def insert(self, data):
         if isinstance(data, list):
@@ -60,3 +62,7 @@ class PureTable(object):
 
     def delete_by_id(self, row_id):
         return self.delete("`id`={}".format(row_id))
+
+    def select_by_id(self, fields, row_id):
+        where = "`id`={}".format(row_id)
+        return self.select_one(fields, where)

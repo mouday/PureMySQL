@@ -3,11 +3,21 @@
 # @Date    : 2019-06-27
 # @Author  : Peng Shiyu
 
-
+from __future__ import unicode_literals, print_function
 from functools import partial
 
 
 class SQLBuilder(object):
+    """
+    SQL拼接
+
+    eg:
+    >>> sql_builder = SQLBuilder()
+    >>> sql_builder.select("name, age").from_("student").where("id=1").build()
+    'SELECT name, age FROM student WHERE id=1'
+
+    """
+
     def __init__(self):
         self._sqls = []
 
@@ -31,7 +41,6 @@ class SQLBuilder(object):
 
 
 if __name__ == '__main__':
-    sql_builder = SQLBuilder()
-    sql = sql_builder.select("name, age").from_("student").where("id=1").order_by("id")
-    print(sql)
-    # SELECT name, age FROM student WHERE id=1 ORDER BY id
+    import doctest
+
+    doctest.testmod()

@@ -3,9 +3,11 @@
 # @Date    : 2019-06-27
 # @Author  : Peng Shiyu
 
+from __future__ import unicode_literals, print_function
 import mysql.connector
 
 from puremysql.logger import pure_mysql_logger
+from puremysql.pure_table import PureTable
 
 
 class PureMysql(object):
@@ -29,6 +31,9 @@ class PureMysql(object):
         if commit:
             self.connect.commit()
 
-        pure_mysql_logger.info(self.cursor.statement)
+        # pure_mysql_logger.info(self.cursor.statement)
 
         return self.cursor
+
+    def table(self, table_name):
+        return PureTable(self, table_name)

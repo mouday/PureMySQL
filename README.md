@@ -1,9 +1,19 @@
 # PureMySQL
+![PyPI](https://img.shields.io/pypi/v/PureMySQL.svg)
 
 一个MySQL简单操作方式
 
+```
+pip install PureMySQL
+```
+
+- https://github.com/mouday/PureMySQL
+- https://pypi.org/project/PureMySQL/
+
 代码示例
 ```python
+
+from puremysql import PureMysql
 
 db_config = {
     "database": "mydata",

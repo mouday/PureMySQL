@@ -3,4 +3,6 @@
 # @Date    : 2019-06-27
 # @Author  : Peng Shiyu
 
-VERSION = "0.0.1"
+from __future__ import unicode_literals, print_function
+
+VERSION = "0.0.2"
