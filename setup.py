@@ -8,8 +8,6 @@ import os
 
 from setuptools import setup, find_packages
 
-import os
-
 """
 ## 本地测试
 安装测试
@@ -54,7 +52,7 @@ base_dir = os.path.dirname(os.path.abspath(__file__))
 
 version = {}
 with io.open(os.path.join(base_dir, "puremysql/version.py"), 'r') as f:
-    exec(f.read(), version)
+    exec (f.read(), version)
 
 with io.open("README.md", 'r', encoding='utf-8') as f:
     long_description = f.read()
@@ -79,7 +77,8 @@ setup(
     # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6"
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 2.7"
     ],
 
     packages=find_packages(),
