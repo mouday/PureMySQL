@@ -12,6 +12,7 @@ pip install PureMySQL
 
 代码示例
 ```python
+# -*- coding: utf-8 -*-
 
 from puremysql import PureMysql
 
@@ -24,7 +25,7 @@ db_config = {
 }
 
 pure_mysql = PureMysql(**db_config)
-student = PureTable(pure_mysql, "student")
+student = pure_mysql.table("student")
 
 
 # 插入数据
@@ -35,7 +36,7 @@ def test_insert():
     }
 
     count = student.insert(data)
-    print(count)
+    print(count)  # 1
 
     data = [
         {
@@ -50,16 +51,16 @@ def test_insert():
         }
     ]
     count = student.insert(data)
-    print(count)
+    print(count)  # 2
 
 
 # 删除数据
 def test_delete():
     ret = student.delete("id=13")
-    print(ret)
+    print(ret)  # 1
 
     ret = student.delete_by_id(12)
-    print(ret)
+    print(ret)  # 1
 
 
 # 更新数据
@@ -67,22 +68,29 @@ def test_update():
     data = {
         "name": "Tom"
     }
-    # ret = student.update(data, "name='Tom'")
-    # print(ret)
+    ret = student.update(data, "name='Tom'")
+    print(ret)  # 1
 
     ret = student.update_by_id(data, 1)
-    print(ret)
+    print(ret)  # 1
 
 
 # 查询数据
 def test_select():
     ret = student.select(["name", "age"], "id=1")
     print(ret)
+    # [{"name": "Tom", "age": 25}]
 
     ret = student.select("name, age", "id=1")
     print(ret)
+    # [{"name": "Tom", "age": 25}]
 
     ret = student.select_one(["name", "age"], "id=1")
     print(ret)
+    # {"name": "Tom", "age": 25}
+
+    ret = student.select_by_id("name, age", 2007)
+    print(ret)
+    # {"name": "Tom", "age": 25}
 
 ```

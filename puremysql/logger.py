@@ -6,8 +6,5 @@
 from __future__ import unicode_literals, print_function
 import logging
 
-pure_mysql_logger = logging.getLogger(__name__)
-pure_mysql_logger.setLevel(logging.DEBUG)
-
+pure_mysql_logger = logging.getLogger("pure_mysql")
 pure_mysql_logger.addHandler(logging.NullHandler())
-

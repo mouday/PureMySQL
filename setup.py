@@ -16,7 +16,7 @@ import os
 python setup.py install 
 
 卸载
-pip uninstall spideradmin -y
+pip uninstall puremysql -y
 
 
 ## 打包上传
@@ -41,7 +41,7 @@ rm -rf dist build spideradmin.egg-info \
 
 ## 下载测试
 安装测试
-pip install -U spideradmin -i https://pypi.org/simple
+pip install -U puremysql -i https://pypi.org/simple
 
 打包的用的setup必须引入
 
