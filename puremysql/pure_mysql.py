@@ -12,14 +12,26 @@ from puremysql.util import parse_db_url
 
 
 class PureMysql(object):
-    def __init__(self, db_url=None, **db_config):
+    def __init__(self, **db_config):
+        """
+        :param db_config:
+        default:
+            "host": "127.0.0.1",
+            "port": 3306,
+            "password": "",
+            "user": "",
+            "database": None,
+            "db_url": ""
+        """
         # 返回字典对象
+        db_url = db_config.get("db_url")
         if db_url:
             parse_config = parse_db_url(db_url)
             if parse_config.pop("scheme") != "mysql":
                 raise Exception("scheme not mysql")
             else:
                 db_config.update(parse_config)
+
         self.connect = mysql.connector.connect(**db_config)
         self.cursor = self.connect.cursor(dictionary=True)
 
