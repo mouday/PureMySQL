@@ -61,9 +61,11 @@ class SQLBuilderUtil(object):
         return ", ".join(["`{0}`=%({0})s".format(key) for key in keys])
 
     @classmethod
-    def get_select_sql(cls, table, fields, where):
+    def get_select_sql(cls, table, fields="*", where=None, limit=None, offset=None):
         """
         获取简单的select 语句
+        :param offset:
+        :param limit:
         :param table: str
         :param fields: list / str
         :param where: str
@@ -73,6 +75,9 @@ class SQLBuilderUtil(object):
         >>> SQLBuilderUtil.get_select_sql("student", ["name", "age"], "id=1")
         'SELECT `name`, `age` FROM student WHERE id=1'
 
+        >>> SQLBuilderUtil.get_select_sql("student", "*", limit=1, offset=3)
+        'SELECT student FROM * LIMIT 1 OFFSET 3'
+
         """
 
         fields_str = cls.get_key_str(fields)
@@ -80,7 +85,15 @@ class SQLBuilderUtil(object):
         sql_builder = SQLBuilder()
         sql_builder.select(fields_str)
         sql_builder.from_(table)
-        sql_builder.where(where)
+
+        if where:
+            sql_builder.where(where)
+
+        if limit:
+            sql_builder.limit(limit)
+
+        if offset:
+            sql_builder.offset(offset)
 
         return sql_builder.build()
 
