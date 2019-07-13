@@ -30,6 +30,7 @@ class PureMysql(object):
             if parse_config.pop("scheme") != "mysql":
                 raise Exception("scheme not mysql")
             else:
+                db_config.pop("db_url")
                 db_config.update(parse_config)
 
         self.connect = mysql.connector.connect(**db_config)
