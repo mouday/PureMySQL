@@ -41,7 +41,7 @@ class PureMysql(object):
         self.connect.close()
 
     def execute(self, sql, data=(), commit=False):
-        pure_mysql_logger.info(self.cursor.statement)
+        # pure_mysql_logger.info(self.cursor.statement)
 
         if isinstance(data, list):
             self.cursor.executemany(sql, data)
