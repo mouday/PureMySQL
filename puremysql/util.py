@@ -14,7 +14,8 @@ def parse_db_url(url):
     :return: dict
     """
     parse_result = urlparse(url)
-    result = re.match("(?P<user>.*):(?P<password>.*)@(?P<host>.*):(?P<port>\d+)", parse_result.netloc)
+    result = re.match(
+        "(?P<user>.*):(?P<password>.*)@(?P<host>.*):(?P<port>\d+)", parse_result.netloc)
     groupdict = result.groupdict()
 
     db_config = {

@@ -19,7 +19,8 @@ class PureTable(object):
         return self.pure_mysql.execute(sql, data, commit)
 
     def select(self, fields="*", where=None, limit=None, offset=None):
-        sql = SQLBuilderUtil.get_select_sql(self.table_name, fields, where, limit, offset)
+        sql = SQLBuilderUtil.get_select_sql(
+            self.table_name, fields, where, limit, offset)
         cursor = self.execute(sql)
         return cursor.fetchall()
 
@@ -54,7 +55,7 @@ class PureTable(object):
 
     def delete(self, where):
         sql = SQLBuilderUtil.get_delete_sql(self.table_name, where)
-        cursor = self.execute(sql, commit=False)
+        cursor = self.execute(sql, commit=True)
         return cursor.rowcount
 
     def update(self, where, data):
@@ -63,7 +64,8 @@ class PureTable(object):
         :param where: str
         :return: int
         """
-        sql = SQLBuilderUtil.get_update_sql(self.table_name, data.keys(), where)
+        sql = SQLBuilderUtil.get_update_sql(
+            self.table_name, data.keys(), where)
         cursor = self.execute(sql, data, True)
         return cursor.rowcount
 
@@ -93,5 +95,3 @@ class PureTable(object):
         cursor = self.execute(sql)
         row = cursor.fetchone()
         return row.get("count")
-
-
